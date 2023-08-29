@@ -6,61 +6,36 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
-<<<<<<< Updated upstream
-  pScope.load_image_sequence("jelly1.png","png",1)
-  pScope.load_image_sequence("jelly2.png","png",2)
-  pScope.load_image_sequence("jelly3.png","png",3)
-  pScope.load_image_sequence("jelly4.png","png",4)
-  pScope.load_image_sequence("jelly5.png","png",5)
-  pScope.load_image_sequence("jelly6.png","png",6)
-  pScope.load_image_sequence("jelly7.png","png",7)
-=======
-  pScope.load_image("Heart","png");
->>>>>>> Stashed changes
+  pScope.load_image_sequence("jelly","png",7)
+  
 }
 
 function setup_layers(pScope){
 
-  new PLayer(null, 0);  //lets us draw the whole circle background, ignoring the boundaries
-
-  var layer1 = new PLayer(Jelly);
-  layer1.mode( SWIRL(2) );
-  layer1.set_boundary(100, 600);
+  new PLayer(null, 27, 39, 71);  //lets us draw the whole circle background, ignoring the boundaries
   
-<<<<<<< Updated upstream
-  var layer2 = new PLayer(outer,color(172, 204, 232) );
-  layer2.mode( RING );
-  layer2.set_boundary(650,1000);
+  var layer1 = new PLayer(outer,color(52, 75, 138) );
+  layer1.mode( RING );
+  layer1.set_boundary(200,1000);
 
-=======
-  var layer2 = new PLayer(outer,color(189, 121, 102) );
+  var layer2 = new PLayer(outer,color(143, 160, 207) );
   layer2.mode( RING );
-  layer2.set_boundary(650,1000);
+  layer2.set_boundary(800,1000);
+  
+  var layer3 = new PLayer(Jelly);
+  layer3.mode( SWIRL(2) );
+  layer3.set_boundary(100, 1000);
 
- var layer3 = new PLayer (hearts);
- layer3.mode (SWIRL(2));
- layer3.set_boundary(100,1000);
->>>>>>> Stashed changes
+  var layer4 = new PLayer (middle,color(27, 31, 41));
+  layer4.mode(SWIRL (2));
+  layer4.set_boundary (0,200);
+
+  var layer5 = new PLayer (bubbles)
+  layer5.mode(RING);
+  layer5.set_boundary (300,500);
   
 }
 
-function Jelly (x,y,animation,pScope){
-pScope.draw_image_from_sequence("jelly1.png","png", x, y, animation.frame);
-pScope.draw_image_from_sequence("jelly2.png","png", x, y, animation.frame);
-pScope.draw_image_from_sequence("jelly3.png","png", x, y, animation.frame);
-pScope.draw_image_from_sequence("jelly4.png","png", x, y, animation.frame);
-pScope.draw_image_from_sequence("jelly5.png","png", x, y, animation.frame);
-pScope.draw_image_from_sequence("jelly6.png","png", x, y, animation.frame);
-pScope.draw_image_from_sequence("jelly7.png","png", x, y, animation.frame);
-
-<<<<<<< Updated upstream
-=======
-strokeWeight (0)
-fill (189, 121, 102)
-ellipse (0,50,80,80) //Outer Circle
->>>>>>> Stashed changes
-
-}
 
 function outer (x, y, animation,pScope){
 
@@ -68,17 +43,26 @@ function outer (x, y, animation,pScope){
 
 }
 
-<<<<<<< Updated upstream
+function Jelly (x,y,animation,pScope){
 
-=======
-function hearts (x,y,animation,pScope){
-scale (0.2)
-  pScope.draw_image("Heart",x,y);
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*7) );
+
+
+
 
 
 }
->>>>>>> Stashed changes
 
+function middle (x,y,animation, pScope){
+
+  
+}
+function bubbles (x,y,animation,pScope){
+
+ellipse (400*animation.frame,400,30,30)
+ellipse (300*animation.frame,500,30,30)
+ellipse (450*animation.frame,300,30,30)
+}
 
 
 //use recordings to learn spinning objects and colour changes
