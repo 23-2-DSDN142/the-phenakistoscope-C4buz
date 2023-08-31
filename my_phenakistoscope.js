@@ -1,4 +1,4 @@
-const SLICE_COUNT = 15;
+const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
   pScope.output_mode(ANIMATED_DISK);
@@ -12,27 +12,33 @@ function setup_pScope(pScope){
 
 function setup_layers(pScope){
 
-  new PLayer(null, 27, 39, 71);  //lets us draw the whole circle background, ignoring the boundaries
+  new PLayer(null, 52, 75, 138);  //lets us draw the whole circle background, ignoring the boundaries
   
-  var layer1 = new PLayer(outer,color(52, 75, 138) );
-  layer1.mode( RING );
-  layer1.set_boundary(200,1000);
+  var Rim = new PLayer(outer,color(143, 160, 207) );
+  Rim.mode( RING );
+  Rim.set_boundary(950,1000);
 
-  var layer2 = new PLayer(outer,color(143, 160, 207) );
-  layer2.mode( RING );
-  layer2.set_boundary(800,1000);
-  
-  var layer3 = new PLayer(Jelly);
-  layer3.mode( SWIRL(2) );
-  layer3.set_boundary(100, 1000);
+  // var layer4 = new PLayer (bubbles)
+  // layer4.mode(SWIRL(2));
+  // layer4.set_boundary (100,1000);
 
-  var layer4 = new PLayer (middle,color(27, 31, 41));
-  layer4.mode(SWIRL (2));
-  layer4.set_boundary (0,200);
+  var Fish = new PLayer (fish)
+  Fish.mode(RING)
+  Fish.set_boundary (0,1000)
 
-  var layer5 = new PLayer (bubbles)
-  layer5.mode(RING);
-  layer5.set_boundary (300,500);
+  var JellyFish = new PLayer(Jelly);
+  JellyFish.mode( SWIRL(2) );
+  JellyFish.set_boundary(100, 1000);
+
+  var coral = new PLayer (middle,color(27, 31, 41));
+  coral.mode(SWIRL (2));
+  coral.set_boundary (0,200);
+
+  var Light = new PLayer (light)
+  Light.mode(RING)
+  Light.set_boundary (0,1000)
+
+ 
   
 }
 
@@ -59,10 +65,23 @@ function middle (x,y,animation, pScope){
 }
 function bubbles (x,y,animation,pScope){
 
-ellipse (400*animation.frame,400,30,30)
-ellipse (300*animation.frame,500,30,30)
-ellipse (450*animation.frame,300,30,30)
+ellipse (150*animation.frame,90,30,30)
+ellipse (100*animation.frame,100,30,30)
+ellipse (90*animation.frame,110,30,30)
 }
 
+function fish (x,y,animation,pScope){
+  fill (245, 139, 69)
+  ellipse (500,150-animation.wave()*30,20,50)
 
+  fill (230, 223, 218)
+  ellipse (700,10-animation.wave()*30,20,50)
+
+}
+
+function light(x,y,animation,pScope){
+  strokeWeight (0)
+  fill (201, 216, 255)
+  triangle (-40,-1000,0,0-animation.wave()*100,40,-1000) 
+}
 //use recordings to learn spinning objects and colour changes
