@@ -1,14 +1,12 @@
 const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(ANIMATED_FRAME);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image_sequence("jelly","png",7)
-  
-  
   
 }
 
@@ -20,17 +18,21 @@ function setup_layers(pScope){
   Rim.mode( RING );
   Rim.set_boundary(950,1000);
 
-  // var layer4 = new PLayer (bubbles)
-  // layer4.mode(SWIRL(2));
-  // layer4.set_boundary (100,1000);
-
-  var Fish = new PLayer (fish)
-  Fish.mode(RING)
-  Fish.set_boundary (0,1000)
+  // var whitefish = new PLayer (white_fish)
+  // whitefish.mode(RING)
+  // whitefish.set_boundary (0,1000)
 
   var JellyFish = new PLayer(Jelly);
   JellyFish.mode( SWIRL(2) );
-  JellyFish.set_boundary(100, 1000);
+  JellyFish.set_boundary(0, 1000);
+
+  var layer4 = new PLayer (bubbles)
+  layer4.mode(SWIRL(2));
+  layer4.set_boundary (1,800);
+
+  var orangefish = new PLayer (orange_fish)
+  orangefish.mode(RING)
+  orangefish.set_boundary (0,1000)
 
   var coral = new PLayer (middle,color(27, 31, 41));
   coral.mode(SWIRL (2));
@@ -40,7 +42,7 @@ function setup_layers(pScope){
   // Light.mode(RING)
   // Light.set_boundary (0,1000)
 
- 
+  
   
 }
 
@@ -50,42 +52,44 @@ function outer (x, y, animation,pScope){
 
 
 }
-
 function Jelly (x,y,animation,pScope){
-
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*7) );
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*6) );
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*5) );
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*4) );
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*3) );
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*2) );
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*1) );
- pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*0) );
+  scale (0.9)
+  pScope.draw_image_from_sequence("jelly", 0, 0, animation.frame);
+  
 }
-
 function middle (x,y,animation, pScope){
 
   
 }
 function bubbles (x,y,animation,pScope){
-
-ellipse (150*animation.frame,90,30,30)
-ellipse (100*animation.frame,100,30,30)
-ellipse (90*animation.frame,110,30,30)
+let start_colour = color(255,255,255)
+let end_colour = color(52,75,138)
+let animating_colour = lerpColor(start_colour,end_colour,animation.frame)
+fill (animating_colour)
+scale (0.6)
+ellipse (-80,0-animation.wave()*100,30,30)
+ellipse (0,40-animation.wave()*100,30,30)
+ellipse (80,0-animation.wave()*100,30,30)
 }
-
-function fish (x,y,animation,pScope){
+function orange_fish (x,y,animation,pScope){
+  
   fill (245, 139, 69)
   ellipse (500,150-animation.wave()*30,20,50)
-
-  fill (230, 223, 218)
-  ellipse (700,10-animation.wave()*30,20,50)
+  ellipse (450,100-animation.wave()*30,20,50)
+  ellipse (400,200-animation.wave()*30,20,50)
 
 }
+function white_fish (x,y,animation,pScope){
+  
+  fill (230, 223, 218)
+  ellipse (900,10-animation.wave()*30,20,50)
+  ellipse (850,110-animation.wave()*30,20,50)
 
+}
 function light(x,y,animation,pScope){
   strokeWeight (0)
   fill (201, 216, 255)
   triangle (-40,-1000,0,0-animation.wave()*100,40,-1000) 
 }
+
 //use recordings to learn spinning objects and colour changes
