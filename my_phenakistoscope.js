@@ -8,6 +8,8 @@ function setup_pScope(pScope){
   pScope.set_slice_count(SLICE_COUNT);
   pScope.load_image_sequence("jelly","png",7)
   
+  
+  
 }
 
 function setup_layers(pScope){
@@ -34,9 +36,9 @@ function setup_layers(pScope){
   coral.mode(SWIRL (2));
   coral.set_boundary (0,200);
 
-  var Light = new PLayer (light)
-  Light.mode(RING)
-  Light.set_boundary (0,1000)
+  // var Light = new PLayer (light)
+  // Light.mode(RING)
+  // Light.set_boundary (0,1000)
 
  
   
@@ -52,11 +54,13 @@ function outer (x, y, animation,pScope){
 function Jelly (x,y,animation,pScope){
 
  pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*7) );
-
-
-
-
-
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*6) );
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*5) );
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*4) );
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*3) );
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*2) );
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*1) );
+ pScope.draw_image_from_sequence("jelly", 0, 0, int(animation.frame*0) );
 }
 
 function middle (x,y,animation, pScope){
