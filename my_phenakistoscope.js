@@ -6,8 +6,9 @@ function setup_pScope(pScope){
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
-  pScope.load_image_sequence("jelly","png",7)
+  pScope.load_image_sequence("jelly","png",10)
   pScope.load_image("fish_1" , "png");
+  pScope.load_image("coral", "png");
   pScope.load_image("Background" , "png");
   
 }
@@ -38,9 +39,9 @@ function setup_layers(pScope){
   orangefish.mode(RING)
   orangefish.set_boundary (0,1000)
 
-  var coral = new PLayer (middle,color(27, 31, 41));
-  coral.mode(SWIRL (2));
-  coral.set_boundary (0,200);
+  var coral_centre = new PLayer (middle);
+  coral_centre.mode(SWIRL (2));
+  coral_centre.set_boundary (0,200);
 
   // var Light = new PLayer (light)
   // Light.mode(RING)
@@ -63,13 +64,16 @@ function outer (x, y, animation,pScope){
 
 }
 function Jelly (x,y,animation,pScope){
-  scale (0.9)
-  pScope.draw_image_from_sequence("jelly", 0, 700, animation.frame);
+ push()
+ rotate (180)
+ scale (0.9)
+ pop()
+ pScope.draw_image_from_sequence("jelly", 0, 700, animation.frame);
   
 }
 function middle (x,y,animation, pScope){
-
-  
+  scale (0.3)
+  pScope.draw_image("coral",0,0);
 }
 function bubbles (x,y,animation,pScope){
 let start_colour = color(255,255,255)
