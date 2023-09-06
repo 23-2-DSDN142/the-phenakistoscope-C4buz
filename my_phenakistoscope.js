@@ -32,7 +32,7 @@ function setup_layers(pScope){
   JellyFish.set_boundary(0, 1000);
 
   var layer4 = new PLayer (bubbles)
-  layer4.mode(SWIRL(2));
+  layer4.mode(SWIRL(3));
   layer4.set_boundary (1,800);
 
   var orangefish = new PLayer (orange_fish)
@@ -73,7 +73,7 @@ function Jelly (x,y,animation,pScope){
 }
 function middle (x,y,animation, pScope){
   scale (0.3)
-  pScope.draw_image("coral",0,0);
+  // pScope.draw_image("coral",0,0);
 }
 function bubbles (x,y,animation,pScope){
 let start_colour = color(255,255,255)
