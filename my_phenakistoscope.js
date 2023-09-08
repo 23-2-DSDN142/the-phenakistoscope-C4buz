@@ -1,7 +1,7 @@
 const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
-  pScope.output_mode(OUTPUT_GIF(1000));
+  pScope.output_mode(ANIMATED_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CW);
@@ -23,10 +23,6 @@ function setup_layers(pScope){
   // whitefish.mode(RING)
   // whitefish.set_boundary (0,1000)
 
-  var layer4 = new PLayer (bubbles)
-  layer4.mode(SWIRL(2));
-  layer4.set_boundary (1,600);
-
   var Rim = new PLayer(outer,color(143, 160, 207) );
   Rim.mode( RING );
   Rim.set_boundary(950,1000);
@@ -47,12 +43,16 @@ function setup_layers(pScope){
   plantscentre.mode (RING)
   plantscentre.set_boundary (0,1000);
   
+  var layer4 = new PLayer (bubbles)
+  layer4.mode(SWIRL(1));
+  layer4.set_boundary (200,600);
+
   // coral_centre.mode(SWIRL (2));
   // coral_centre.set_boundary (0,200);
 
   // var Light = new PLayer (light)
   // Light.mode(RING)
-  // Light.set_boundary (0,1000)
+  // Light.set_boundary (5,1000)
   }
 
 function Background (x,y,animation,pScope){
@@ -85,28 +85,28 @@ function bubbles (x,y,animation,pScope){
 let end_colour = color(255,255,255)
 let start_colour = color(52,75,138)
 let animating_colour = lerpColor(start_colour,end_colour,animation.frame)
-fill (animating_colour)
+stroke (animating_colour)
+strokeWeight (2)
+noFill()
 scale (0.6)
-// ellipse (-80,-800-animation.wave()*200,30,30) // ring include an easing function
-// ellipse (0,-700-animation.wave()*200,30,30)
-// ellipse (80,-800-animation.wave()*200,30,30)
 
-ellipse (-80,0-animation.wave()*100,30,30) // swirl
+ellipse (-80,0-animation.wave()*100,30,30) // Outer Ring
 ellipse (0,40-animation.wave()*100,30,30)
 ellipse (80,0-animation.wave()*100,30,30)
+
+ellipse (-76,-2-animation.wave()*100,8,8) // Inner Ring
+ellipse (4,38-animation.wave()*100,8,8)
+ellipse (84,-2-animation.wave()*100,8,8)
 }
 function orange_fish (x,y,animation,pScope){
+  
   push()
-  scale (0.02)
-  pScope.draw_image("fish_1",0-animation.wave()*600,-20000);
-  pScope.draw_image("fish_1",4000-animation.wave()*600,-18000);
-  pScope.draw_image("fish_1",-2000-animation.wave()*600,-15000);
+  scale (0.017)
+  pScope.draw_image("fish_1",0-animation.wave()*600,-25000);
+  pScope.draw_image("fish_1",4000-animation.wave()*600,-23000);
+  pScope.draw_image("fish_1",-2000-animation.wave()*600,-22000);
   pop()
-  // fill (245, 139, 69)
-  // ellipse (500,150-animation.wave()*30,20,50)
-  // ellipse (450,100-animation.wave()*30,20,50)
-  // ellipse (400,200-animation.wave()*30,20,50)
-
+ 
 }
 function white_fish (x,y,animation,pScope){
   
