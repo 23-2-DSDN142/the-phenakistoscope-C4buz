@@ -11,49 +11,40 @@ function setup_pScope(pScope){
   pScope.load_image("coral", "png");
   pScope.load_image("Background", "png");
   pScope.load_image("plants", "png");
+
+ let coral_base_colour = "#143752" // this is stopping it from working?
 }
 
 function setup_layers(pScope){
-
-  new PLayer(null, 52, 75, 138);  //lets us draw the whole circle background, ignoring the boundaries
+   new PLayer(null, 42, 79, 107);  //lets us draw the whole circle background, ignoring the boundaries
   
   // var background = new PLayer (Background)
     
-  // var whitefish = new PLayer (white_fish)
-  // whitefish.mode(RING)
-  // whitefish.set_boundary (0,1000)
-
-  var Rim = new PLayer(outer,color(143, 160, 207) );
-  Rim.mode( RING );
-  Rim.set_boundary(950,1000);
-
-  var JellyFish = new PLayer(Jelly);
-  JellyFish.mode( RING );
-  JellyFish.set_boundary(0, 1000);
-
   var orangefish = new PLayer (orange_fish);
   orangefish.mode(RING)
   orangefish.set_boundary (0,1000)
+ 
+  var JellyFish = new PLayer(Jelly);
+  JellyFish.mode( RING );
+  JellyFish.set_boundary(0, 1000);
 
   var coral_centre = new PLayer (middle);
   coral_centre.mode
   coral_centre.set_boundary (0,200);
 
-  var plantscentre = new PLayer (coral_plants);
-  plantscentre.mode (RING)
-  plantscentre.set_boundary (0,1000);
+  var coral_edge = new PLayer (edge);
+  coral_edge.mode
+  coral_edge.set_boundary (940,1000);
+
+  // var plantscentre = new PLayer (coral_plants);
+  // plantscentre.mode (RING)
+  // plantscentre.set_boundary (0,1000);
   
   var layer4 = new PLayer (bubbles)
   layer4.mode(SWIRL(1));
-  layer4.set_boundary (200,600);
+  layer4.set_boundary (200,500);
 
-  // coral_centre.mode(SWIRL (2));
-  // coral_centre.set_boundary (0,200);
-
-  // var Light = new PLayer (light)
-  // Light.mode(RING)
-  // Light.set_boundary (5,1000)
-  }
+}
 
 function Background (x,y,animation,pScope){
   push()
@@ -69,26 +60,26 @@ function outer (x, y, animation,pScope){
 }
 function Jelly (x,y,animation,pScope){
  push()
- rotate (180)
  scale (0.9)
  pop()
- pScope.draw_image_from_sequence("jelly", 0, 650, animation.frame);
+ pScope.draw_image_from_sequence("jelly", 0-animation.wave()*10, 550, animation.frame);
   
 }
 function middle (x,y,animation, pScope){
-  scale (0.9)
-  // pScope.draw_image("coral",0,0);
-  pScope.fill_background (106, 126, 148)
+ 
+  pScope.fill_background (20, 55, 82)
   
 }
 function bubbles (x,y,animation,pScope){
+
 let end_colour = color(255,255,255)
 let start_colour = color(52,75,138)
 let animating_colour = lerpColor(start_colour,end_colour,animation.frame)
 stroke (animating_colour)
 strokeWeight (2)
 noFill()
-scale (0.6)
+push()
+scale (0.7)
 
 ellipse (-80,0-animation.wave()*100,30,30) // Outer Ring
 ellipse (0,40-animation.wave()*100,30,30)
@@ -97,34 +88,29 @@ ellipse (80,0-animation.wave()*100,30,30)
 ellipse (-76,-2-animation.wave()*100,8,8) // Inner Ring
 ellipse (4,38-animation.wave()*100,8,8)
 ellipse (84,-2-animation.wave()*100,8,8)
+
+pop()
 }
 function orange_fish (x,y,animation,pScope){
   
-  push()
-  scale (0.017)
-  pScope.draw_image("fish_1",0-animation.wave()*600,-25000);
-  pScope.draw_image("fish_1",4000-animation.wave()*600,-23000);
-  pScope.draw_image("fish_1",-2000-animation.wave()*600,-22000);
+  // push()
+  // scale (0.025)
+  // pScope.draw_image("fish_1",0-animation.wave()*600,-35000);
+  // pScope.draw_image("fish_1",4000-animation.wave()*600,-37000);
+  // pScope.draw_image("fish_1",-000-animation.wave()*600,-37000);
+  // pop()
+
+  push() // Original
+  scale (0.02)
+  pScope.draw_image("fish_1",0-animation.wave()*600,-12000);
+  pScope.draw_image("fish_1",4000-animation.wave()*600,-13000);
+  // pScope.draw_image("fish_1",-2000-animation.wave()*600,-17000);
   pop()
  
 }
-function white_fish (x,y,animation,pScope){
-  
-  fill (230, 223, 218)
-  ellipse (900,10-animation.wave()*30,20,50)
-  ellipse (850,110-animation.wave()*30,20,50)
 
+function edge (x,y,animation,pScope) {
+
+  pScope.fill_background (20, 55, 82)
 }
-function light(x,y,animation,pScope){
-  strokeWeight (0)
-  fill (201, 216, 255)
-  triangle (-40,-1000,0,0-animation.wave()*100,40,-1000) 
-}
-
-function coral_plants (x,y,animation,pScope){
-  scale (0.2)
- pScope.draw_image("plants",80,-1000);
-}
-
-
 //use recordings to learn spinning objects and colour changes
