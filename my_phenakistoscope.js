@@ -1,7 +1,7 @@
 const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
-  pScope.output_mode(ANIMATED_DISK);
+  pScope.output_mode(OUTPUT_PRINT(A3));
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
   pScope.set_direction(CW);
@@ -13,7 +13,6 @@ function setup_pScope(pScope){
 
   pScope.load_image("coral", "png");
   pScope.load_image("coralbluegreen", "png");
-  pScope.load_image("coralpinksmall", "png");
   pScope.load_image("coralblue", "png");
   pScope.load_image("coralgreen", "png");
   pScope.load_image("coralpurple", "png");
@@ -23,7 +22,7 @@ function setup_pScope(pScope){
 function setup_layers(pScope){
  
   new PLayer(null, 14, 99, 125);  //lets us draw the whole circle background, ignoring the boundaries
-  
+ 
   var detail = new PLayer (gradientB);
   detail.mode
   detail.set_boundary (0,1000);
@@ -34,7 +33,7 @@ function setup_layers(pScope){
 
   var layer4 = new PLayer (bubbles)
   layer4.mode(SWIRL (2));
-  layer4.set_boundary (200,850);
+  layer4.set_boundary (200,800);
 
   var orangefish = new PLayer (orange_fish);
   orangefish.mode(RING)
@@ -48,24 +47,23 @@ function setup_layers(pScope){
   coral_centre.mode
   coral_centre.set_boundary (0,160);
 
-  var pale_edge = new PLayer (edge);
-  pale_edge.mode
-  pale_edge.set_boundary (950,1000);
   
+
  
 }
 
 function gradientB (x,y,animation,pScope){
  push ()
- scale (0.9)
- pScope.draw_image("gradient",0,-550-animation.wave()*15);
+ scale (1.18)
+ pScope.draw_image("gradient",0,-430-animation.wave()*10);
  pop()
 }
 
 function Jelly (x,y,animation,pScope){
- scale (0.15)
- pScope.draw_image_from_sequence("jelly", 0, 4300-animation.wave()*200, animation.frame);
-  
+  push ()
+  scale (0.155)
+  pScope.draw_image_from_sequence("jelly", 0, 4100-animation.wave()*200, animation.frame);
+  pop ()
 }
 function bubbles (x,y,animation,pScope){
 
@@ -97,25 +95,18 @@ function orange_fish (x,y,animation,pScope){
   
   push() 
   scale (0.015)
-
-  pScope.draw_image_from_sequence("fish",6000-animation.wave()*600,-20000, animation.frame);
-  pScope.draw_image_from_sequence("fish",0-animation.wave()*600,-20000, animation.frame);
-  pScope.draw_image_from_sequence("fish",-5000-animation.wave()*600,-17000, animation.frame);
-
+  pScope.draw_image_from_sequence("fish",6000-animation.wave()*600,-22000, animation.frame);
+  pScope.draw_image_from_sequence("fish",0-animation.wave()*600,-22000, animation.frame);
+  pScope.draw_image_from_sequence("fish",-5000-animation.wave()*600,-19000, animation.frame);
   pop()
 
   push() 
   scale (0.017)
-
-  pScope.draw_image_from_sequence("fish",-10000-animation.wave()*600,-60000, animation.frame);
-  pScope.draw_image_from_sequence("fish",12000-animation.wave()*600,-60000, animation.frame);
-  pScope.draw_image_from_sequence("fish",0-animation.wave()*600,-62000, animation.frame);
-
+  pScope.draw_image_from_sequence("fish",-10000-animation.wave()*900,-53000, animation.frame);
+  pScope.draw_image_from_sequence("fish",12000-animation.wave()*900,-53000, animation.frame);
+  pScope.draw_image_from_sequence("fish",0-animation.wave()*900,-55000, animation.frame);
   pop()
- 
-  
-
-}
+ }
 
 function coral_plants (x,y,animation,pScope){
   
@@ -140,7 +131,7 @@ function middle (x,y,animation, pScope){
 
 function edge (x,y,animation, pScope){
 
-pScope.fill_background (132, 177, 191)
+pScope.fill_background (154, 203, 219)
   
 }
 
